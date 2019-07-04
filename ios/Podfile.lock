@@ -1,0 +1,52 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_full_pdf_viewer (1.0.1):
+    - Flutter
+  - flutter_pdfview (0.0.1):
+    - Flutter
+  - flutter_webview_plugin (0.0.1):
+    - Flutter
+  - launch_review (0.0.1):
+    - Flutter
+  - path_provider (0.0.1):
+    - Flutter
+  - url_launcher (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_full_pdf_viewer (from `.symlinks/plugins/flutter_full_pdf_viewer/ios`)
+  - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
+  - flutter_webview_plugin (from `.symlinks/plugins/flutter_webview_plugin/ios`)
+  - launch_review (from `.symlinks/plugins/launch_review/ios`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: ".symlinks/flutter/ios"
+  flutter_full_pdf_viewer:
+    :path: ".symlinks/plugins/flutter_full_pdf_viewer/ios"
+  flutter_pdfview:
+    :path: ".symlinks/plugins/flutter_pdfview/ios"
+  flutter_webview_plugin:
+    :path: ".symlinks/plugins/flutter_webview_plugin/ios"
+  launch_review:
+    :path: ".symlinks/plugins/launch_review/ios"
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  url_launcher:
+    :path: ".symlinks/plugins/url_launcher/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_full_pdf_viewer: 8a6723fa44d3e421520b70ca95fa38155a68eccf
+  flutter_pdfview: bdf86972519a15c6d8f50ad34e5b0429b255cbb4
+  flutter_webview_plugin: ed9e8a6a96baf0c867e90e1bce2673913eeac694
+  launch_review: 75d5a956ba8eaa493e9c9d4bf4c05e505e8d5ed0
+  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
+
+PODFILE CHECKSUM: 9db81e00e56d5e259bfc0381f65bf9d08c93ad53
+
+COCOAPODS: 1.7.2
