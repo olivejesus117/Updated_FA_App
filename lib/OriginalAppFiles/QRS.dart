@@ -18,6 +18,7 @@ class QRS extends StatefulWidget {
 class ListState extends State<QRS> {
   ListState(List<QRSobject> this.passedList);
 
+
   final List<QRSobject> passedList;
   Color AdarkBlue = Color.fromRGBO(21, 57, 112, 1);
   Color AlightBlue = Color.fromRGBO(35, 78, 142, 1);
@@ -26,7 +27,12 @@ class ListState extends State<QRS> {
 
   @override
   Widget build(BuildContext context) {
+
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    double screenWidthMultiplyer = screenWidth/100;
+    double screenHeightMultiplyer = screenHeight/100;
 
     return Scaffold(
       appBar: AppBar(
@@ -52,12 +58,12 @@ class ListState extends State<QRS> {
           children: <Widget>[
             Container(
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(35, 78, 142, 1),
+                  color: Colors.blueAccent,
                   border: BorderDirectional(
                       bottom: BorderSide(
                           color: Color.fromRGBO(90, 177, 106, 1), width: 2))),
               width: screenWidth,
-              height: 40,
+              height: screenHeightMultiplyer * 7,
 
               child: Center(
                 child: Table(
@@ -71,10 +77,13 @@ class ListState extends State<QRS> {
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: Center(
-                              child: Text(
+                              child: ConstrainedBox(
+
+                                child: Text(
                             "Condition",
                             style: TextStyle(fontSize: 18, color: lightGreen),
-                          )),
+                          ),
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(4.0),
