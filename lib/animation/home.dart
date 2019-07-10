@@ -186,7 +186,7 @@ class _AllSectionsLayout extends MultiChildLayoutDelegate {
 
   @override
   void performLayout(Size size) {
-    final double columnCardX = size.width / 5.0;
+    final double columnCardX = size.width / 6;
     final double columnCardWidth = size.width - columnCardX;
     final double columnCardHeight = size.height / cardCount;
     final double rowCardWidth = size.width;

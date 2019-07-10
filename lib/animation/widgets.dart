@@ -27,6 +27,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 Color darkBlue = Color.fromRGBO(21, 57, 112, 1);
 
+double screenWidth;
+double screenHeight;
+
+double titleFontSize;
+double buttonFontSize;
+double buttonHeight;
+
 const double kSectionIndicatorWidth = 32.0;
 
 // The card for a single section. Displays the section's gradient and background image.
@@ -39,6 +46,29 @@ class SectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final bool isLandscape = orientation == Orientation.landscape;
+
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+
+    if (isLandscape == true) {
+      screenHeight = screenHeight * 1.5;
+    } else {
+    }
+
+    if (screenHeight < 900){
+      titleFontSize = 24;
+      buttonFontSize = 18;
+      buttonHeight = 65;
+    } else {
+      buttonFontSize = 55;
+      titleFontSize = 100;
+      buttonHeight = 150;
+    }
+
+
     return Semantics(
       label: section.title,
       button: true,
@@ -82,10 +112,12 @@ class SectionTitle extends StatelessWidget {
   final double scale;
   final double opacity;
 
-  static const TextStyle sectionTitleStyle = TextStyle(
+
+
+  static TextStyle sectionTitleStyle = TextStyle(
     fontFamily: 'Raleway',
     inherit: false,
-    fontSize: 24.0,
+    fontSize: titleFontSize,
     fontWeight: FontWeight.w500,
     color: Colors.white,
     textBaseline: TextBaseline.alphabetic,
@@ -169,7 +201,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -196,7 +228,7 @@ class SectionDetailView extends StatelessWidget {
               child: Center(
                   child: Text(
                 detail.buttonText,
-                style: TextStyle(color: darkBlue, fontSize: 18),
+                style: TextStyle(color: darkBlue, fontSize: buttonFontSize),
               )),
             ),
           ),
@@ -217,7 +249,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -242,7 +274,7 @@ class SectionDetailView extends StatelessWidget {
               child: Center(
                   child: Text(
                     detail.buttonText,
-                    style: TextStyle(color: darkBlue, fontSize: 18),
+                    style: TextStyle(color: darkBlue, fontSize: buttonFontSize),
                   )),
             ),
           ),
@@ -264,7 +296,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -284,7 +316,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('Training Videos')) {
@@ -294,7 +326,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -317,7 +349,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('Presentations')) {
@@ -327,7 +359,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -350,7 +382,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('Test Instructions')) {
@@ -360,7 +392,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -382,7 +414,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('QRSlist')) {
@@ -392,7 +424,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -414,7 +446,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('German to English')) {
@@ -424,7 +456,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -446,7 +478,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     } else if (detail.passedData.contains('MDLive')) {
@@ -456,7 +488,7 @@ class SectionDetailView extends StatelessWidget {
           color: Colors.white,
         ),
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
-        height: 65,
+        height: buttonHeight,
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: darkBlue, width: 3),
@@ -475,7 +507,7 @@ class SectionDetailView extends StatelessWidget {
                   },
                   child: Center(
                       child: Text(detail.buttonText,
-                          style: TextStyle(color: darkBlue, fontSize: 18))))),
+                          style: TextStyle(color: darkBlue, fontSize: buttonFontSize))))),
         ),
       );
     }

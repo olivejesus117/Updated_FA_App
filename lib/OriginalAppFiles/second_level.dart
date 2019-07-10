@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'Data.dart';
 import 'list_builder.dart';
@@ -24,10 +25,10 @@ class State1 extends State<AvazziaSecondLevel> {
   Color lightBlue = Color.fromRGBO(35, 78, 142, 1);
   Color green = Color.fromRGBO(90, 177, 106, 1);
 
-  double unpressedHeightASM = 65.0;
-  double unpressedHeightA = 65.0;
-  double unpressedHeightRR = 65.0;
-  double unpressedHeightCA = 65.0;
+  double unpressedHeightASM;
+  double unpressedHeightA;
+  double unpressedHeightRR;
+  double unpressedHeightCA;
 
   double CategoryRadius = 20;
   double ProtocolRadius = 80;
@@ -38,6 +39,12 @@ class State1 extends State<AvazziaSecondLevel> {
   bool showOptionsA = false;
   bool showOptionsRR = false;
   bool showOptionsCA = false;
+
+  double screenWidth;
+  double screenHeight;
+
+  double screenWidthMultiplyer;
+  double screenHeightMultiplyer;
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +73,29 @@ class State1 extends State<AvazziaSecondLevel> {
 //      offsetASM = 1150;
 //      offsetSR = 653;
 //    }
+
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final bool isLandscape = orientation == Orientation.landscape;
+
+    screenWidthMultiplyer = screenWidth / 100;
+    screenHeightMultiplyer = screenHeight / 100;
+
+    if (isLandscape == true) {
+      screenWidthMultiplyer = screenWidth / 70;
+      screenHeightMultiplyer = screenHeight / 70;
+    } else {
+      screenWidthMultiplyer = screenWidth / 100;
+      screenHeightMultiplyer = screenHeight / 100;
+    }
+
+
+    unpressedHeightASM = screenHeightMultiplyer * 10;
+    unpressedHeightA = screenHeightMultiplyer * 10;
+    unpressedHeightRR = screenHeightMultiplyer * 10;
+    unpressedHeightCA = screenHeightMultiplyer * 10;
 
     return Scaffold(
       appBar: AppBar(
@@ -110,36 +140,47 @@ class State1 extends State<AvazziaSecondLevel> {
                                 ? showOptionsCA = true
                                 : showOptionsCA = false;
                             showOptionsCA == true
-                                ? unpressedHeightCA = 100
-                                : unpressedHeightCA = 65;
+                                ? unpressedHeightCA =
+                                    screenHeightMultiplyer * 15
+                                : unpressedHeightCA =
+                                    screenHeightMultiplyer * 10;
 
                             setState(() {});
                           },
                           child: Center(
-                            child: Text(
-                              'Chronic and Acute Pain',
-                              style: TextStyle(
-                                fontSize: 19.0,
-                                fontStyle: FontStyle.normal,
-                                color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                      // bottomLeft
-                                      offset: Offset(-0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // bottomRight
-                                      offset: Offset(0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topRight
-                                      offset: Offset(0.1, 0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topLeft
-                                      offset: Offset(-0.1, 0.1),
-                                      color: Colors.black),
-                                ],
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                maxHeight: screenHeightMultiplyer * 4,
+                                //minHeight: screenHeightMultiplyer * 3,
+                              ),
+                              child: AutoSizeText(
+                                'Chronic and Acute Pain',
+                                maxFontSize: 70,
+                                minFontSize: 19,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  fontSize: 70.0,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                        // bottomLeft
+                                        offset: Offset(-0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // bottomRight
+                                        offset: Offset(0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topRight
+                                        offset: Offset(0.1, 0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topLeft
+                                        offset: Offset(-0.1, 0.1),
+                                        color: Colors.black),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -151,7 +192,7 @@ class State1 extends State<AvazziaSecondLevel> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin:
                                     EdgeInsets.only(left: 16.0, right: 16.0),
@@ -186,15 +227,23 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
-                                    "Carpal Tunnel Protocol",
-                                    style:
-                                        TextStyle(color: green, fontSize: 16),
+                                      child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                        maxHeight: screenHeightMultiplyer * 3),
+                                    child: AutoSizeText(
+                                      "Carpal Tunnel Protocol",
+                                      maxFontSize: 70,
+                                      minFontSize: 16,
+                                      style: TextStyle(
+                                        color: green,
+                                              fontSize: 55
+                                      ),
+                                    ),
                                   )),
                                 ),
                               ),
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin: EdgeInsets.only(
                                     left: 16.0,
@@ -230,15 +279,24 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Sciatica Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin: EdgeInsets.only(
                                     left: 16.0, right: 16.0, bottom: 16.0),
@@ -273,15 +331,24 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Plantar Fasciitis Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin: EdgeInsets.only(
                                     left: 16.0, right: 16.0, bottom: 16.0),
@@ -309,17 +376,25 @@ class State1 extends State<AvazziaSecondLevel> {
                                         const Duration(milliseconds: 500), () {
                                       lightBlueG =
                                           Color.fromRGBO(35, 78, 142, 1);
-
                                       setState(() {});
                                     });
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Elbow Pain Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
                             ],
@@ -358,36 +433,45 @@ class State1 extends State<AvazziaSecondLevel> {
                                 ? showOptionsASM = true
                                 : showOptionsASM = false;
                             showOptionsASM == true
-                                ? unpressedHeightASM = 100
-                                : unpressedHeightASM = 65;
+                                ? unpressedHeightASM =
+                                    screenHeightMultiplyer * 15
+                                : unpressedHeightASM =
+                                    screenHeightMultiplyer * 10;
 
                             setState(() {});
                           },
                           child: Center(
-                            child: Text(
-                              'Anxiety/Stress/Migraine',
-                              style: TextStyle(
-                                fontSize: 19.0,
-                                fontStyle: FontStyle.normal,
-                                color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                      // bottomLeft
-                                      offset: Offset(-0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // bottomRight
-                                      offset: Offset(0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topRight
-                                      offset: Offset(0.1, 0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topLeft
-                                      offset: Offset(-0.1, 0.1),
-                                      color: Colors.black),
-                                ],
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight: screenHeightMultiplyer * 30
+                              ),
+                              child: AutoSizeText(
+                                'Anxiety/Stress/Migraine',
+                                minFontSize: 19,
+                                maxFontSize: 70,
+                                style: TextStyle(
+                                  fontSize: 19.0,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                        // bottomLeft
+                                        offset: Offset(-0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // bottomRight
+                                        offset: Offset(0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topRight
+                                        offset: Offset(0.1, 0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topLeft
+                                        offset: Offset(-0.1, 0.1),
+                                        color: Colors.black),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -399,7 +483,7 @@ class State1 extends State<AvazziaSecondLevel> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 //only add bottom edge inset to last option
                                 margin: EdgeInsets.only(
@@ -434,11 +518,20 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Little Wings Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
 //                            Container(
@@ -494,36 +587,44 @@ class State1 extends State<AvazziaSecondLevel> {
                                 ? showOptionsA = true
                                 : showOptionsA = false;
                             showOptionsA == true
-                                ? unpressedHeightA = 100
-                                : unpressedHeightA = 65;
+                                ? unpressedHeightA = screenHeightMultiplyer * 15
+                                : unpressedHeightA =
+                                    screenHeightMultiplyer * 10;
 
                             setState(() {});
                           },
                           child: Center(
-                            child: Text(
-                              'Aesthetic',
-                              style: TextStyle(
-                                fontSize: 19.0,
-                                fontStyle: FontStyle.normal,
-                                color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                      // bottomLeft
-                                      offset: Offset(-0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // bottomRight
-                                      offset: Offset(0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topRight
-                                      offset: Offset(0.1, 0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topLeft
-                                      offset: Offset(-0.1, 0.1),
-                                      color: Colors.black),
-                                ],
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight: screenHeightMultiplyer * 4
+                              ),
+                              child: AutoSizeText(
+                                'Aesthetic',
+                                minFontSize: 19,
+                                maxFontSize: 70,
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                        // bottomLeft
+                                        offset: Offset(-0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // bottomRight
+                                        offset: Offset(0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topRight
+                                        offset: Offset(0.1, 0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topLeft
+                                        offset: Offset(-0.1, 0.1),
+                                        color: Colors.black),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -535,7 +636,7 @@ class State1 extends State<AvazziaSecondLevel> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin:
                                     EdgeInsets.only(left: 16.0, right: 16.0),
@@ -569,18 +670,30 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Scar Removal Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
-                                margin:
-                                EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
+                                margin: EdgeInsets.only(
+                                    left: 16.0,
+                                    right: 16.0,
+                                    top: 16.0,
+                                    bottom: 16.0),
                                 decoration: BoxDecoration(
                                   color: lightBlueH,
                                   borderRadius: BorderRadius.all(
@@ -595,11 +708,11 @@ class State1 extends State<AvazziaSecondLevel> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => LevelThree(
-                                            passedList: SixPoint,
-                                            procedure:
-                                            "Six-Point Face Protocol",
-                                            //listHeight: offsetSR,
-                                          )),
+                                                passedList: SixPoint,
+                                                procedure:
+                                                    "Six-Point Face Protocol",
+                                                //listHeight: offsetSR,
+                                              )),
                                     );
                                     Future.delayed(
                                         const Duration(milliseconds: 500), () {
@@ -611,10 +724,19 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
-                                        "Six-Point Face Protocol",
-                                        style:
-                                        TextStyle(color: green, fontSize: 16),
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
+                                    "Six-Point Face Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
+                                    style:
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
                                       )),
                                 ),
                               ),
@@ -653,36 +775,45 @@ class State1 extends State<AvazziaSecondLevel> {
                                 ? showOptionsRR = true
                                 : showOptionsRR = false;
                             showOptionsRR == true
-                                ? unpressedHeightRR = 100
-                                : unpressedHeightRR = 65;
+                                ? unpressedHeightRR =
+                                    screenHeightMultiplyer * 15
+                                : unpressedHeightRR =
+                                    screenHeightMultiplyer * 10;
 
                             setState(() {});
                           },
                           child: Center(
-                            child: Text(
-                              'Relax and Release',
-                              style: TextStyle(
-                                fontSize: 19.0,
-                                fontStyle: FontStyle.normal,
-                                color: Colors.white,
-                                shadows: [
-                                  Shadow(
-                                      // bottomLeft
-                                      offset: Offset(-0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // bottomRight
-                                      offset: Offset(0.1, -0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topRight
-                                      offset: Offset(0.1, 0.1),
-                                      color: Colors.black),
-                                  Shadow(
-                                      // topLeft
-                                      offset: Offset(-0.1, 0.1),
-                                      color: Colors.black),
-                                ],
+                            child: ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight: screenHeightMultiplyer * 4
+                              ),
+                              child: AutoSizeText(
+                                'Relax and Release',
+                                minFontSize: 19,
+                                maxFontSize: 70,
+                                style: TextStyle(
+                                  fontSize: 70,
+                                  fontStyle: FontStyle.normal,
+                                  color: Colors.white,
+                                  shadows: [
+                                    Shadow(
+                                        // bottomLeft
+                                        offset: Offset(-0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // bottomRight
+                                        offset: Offset(0.1, -0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topRight
+                                        offset: Offset(0.1, 0.1),
+                                        color: Colors.black),
+                                    Shadow(
+                                        // topLeft
+                                        offset: Offset(-0.1, 0.1),
+                                        color: Colors.black),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -694,7 +825,7 @@ class State1 extends State<AvazziaSecondLevel> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: <Widget>[
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
                                 margin:
                                     EdgeInsets.only(left: 16.0, right: 16.0),
@@ -727,18 +858,30 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
                                     "Vagus D Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70,
                                     style:
-                                        TextStyle(color: green, fontSize: 16),
-                                  )),
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
+                                      )),
                                 ),
                               ),
                               Container(
-                                height: 50,
+                                height: screenHeightMultiplyer * 8,
                                 //color: lightBlue,
-                                margin:
-                                EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 16.0),
+                                margin: EdgeInsets.only(
+                                    left: 16.0,
+                                    right: 16.0,
+                                    top: 16.0,
+                                    bottom: 16.0),
                                 decoration: BoxDecoration(
                                   color: lightBlueI,
                                   borderRadius: BorderRadius.all(
@@ -753,10 +896,11 @@ class State1 extends State<AvazziaSecondLevel> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => LevelThree(
-                                            passedList: CoreWholeBody,
-                                            procedure: 'Core Whole Body Protocol',
-                                            // listHeight: offsetSR,
-                                          )),
+                                                passedList: CoreWholeBody,
+                                                procedure:
+                                                    'Core Whole Body Protocol',
+                                                // listHeight: offsetSR,
+                                              )),
                                     );
                                     Future.delayed(
                                         const Duration(milliseconds: 500), () {
@@ -768,10 +912,19 @@ class State1 extends State<AvazziaSecondLevel> {
                                   },
                                   splashColor: green,
                                   child: Center(
-                                      child: Text(
-                                        "Core Whole Body Protocol",
-                                        style:
-                                        TextStyle(color: green, fontSize: 16),
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                            maxHeight: screenHeightMultiplyer * 3
+                                        ),
+                                        child: AutoSizeText(
+                                    "Core Whole Body Protocol",
+                                    minFontSize: 16,
+                                    maxFontSize: 70 ,
+                                    style:
+                                          TextStyle(color: green,
+                                              fontSize: 55
+                                          ),
+                                  ),
                                       )),
                                 ),
                               ),

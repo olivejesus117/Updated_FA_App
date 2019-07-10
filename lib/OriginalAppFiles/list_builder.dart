@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,6 +35,9 @@ class ListState extends State<LevelThree> {
 
   double screenWidth;
   double screenHeight;
+
+  double fontsize;
+
   double cWidth = 0.0;
   double itemHeight = 100;
   int itemsCount;
@@ -74,7 +78,18 @@ class ListState extends State<LevelThree> {
     final bool isLandscape = orientation == Orientation.landscape;
 
     screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
 
+    if (isLandscape == true) {
+      screenHeight = screenHeight * 1.5;
+    } else {
+    }
+
+    if (screenHeight < 900){
+      fontsize = 18;
+    } else {
+      fontsize = 55;
+    }
 //    double progressWidth;
 //
 //    if (cWidth >= 0) {
@@ -92,7 +107,7 @@ class ListState extends State<LevelThree> {
     if (passedList[0].playYoutube.isEmpty) {
       ytHeight = 0;
     } else {
-      ytHeight = 50;
+      ytHeight = screenHeight/12;
     }
 
     if (isLandscape == true) {
@@ -169,12 +184,20 @@ class ListState extends State<LevelThree> {
                                       Icons.play_arrow,
                                       color: Colors.white,
                                     ),
-                                    Text(
-                                      '${passedList[index].playYoutube}',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        color: Colors.white,
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxHeight: screenHeight/30
+                                      ),
+                                      child: AutoSizeText(
+                                        '${passedList[index].playYoutube}',
+                                        minFontSize: 18,
+                                        maxFontSize: 70,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.start,
+                                        style: TextStyle(
+                                          fontSize: 55,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -208,11 +231,19 @@ class ListState extends State<LevelThree> {
                                   child: Container(
                                     padding:
                                         EdgeInsetsDirectional.only(start: 16,end: 8),
-                                    child: Text(
-                                      '${passedList[index].heading}',
-                                      textAlign: TextAlign.start,
-                                      style: new TextStyle(
-                                        fontSize: 18.0,
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          maxHeight: screenHeight/30
+                                      ),
+                                      child: AutoSizeText(
+                                        '${passedList[index].heading}',
+                                        minFontSize: 18,
+                                        maxFontSize: 70,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.start,
+                                        style: new TextStyle(
+                                          fontSize: 55,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -250,10 +281,17 @@ class ListState extends State<LevelThree> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Text(
-                                      '${passedList[index].direction}',
-                                      style: new TextStyle(
-                                        fontSize: 18.0,
+                                    ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                          maxHeight: screenHeight/3,
+                                      ),
+                                      child: AutoSizeText(
+                                        '${passedList[index].direction}',
+                                        minFontSize: 18,
+                                        maxFontSize: 70,
+                                        style: new TextStyle(
+                                          fontSize: fontsize,
+                                        ),
                                       ),
                                     ),
                                     Container(
