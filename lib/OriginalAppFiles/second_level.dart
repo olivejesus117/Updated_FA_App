@@ -97,6 +97,11 @@ class State1 extends State<AvazziaSecondLevel> {
     unpressedHeightRR = screenHeightMultiplyer * 10;
     unpressedHeightCA = screenHeightMultiplyer * 10;
 
+    if (screenHeight > 900) {
+      screenWidthMultiplyer = screenWidth / 200;
+      screenHeightMultiplyer = screenHeight / 200;
+    }
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

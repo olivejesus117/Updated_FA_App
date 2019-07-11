@@ -17,6 +17,11 @@ const Color _kAppBackgroundColor = Color(0xFF353662);
 const Duration _kScrollDuration = Duration(milliseconds: 400);
 const Curve _kScrollCurve = Curves.fastOutSlowIn;
 
+double scrollHeight;
+double screenWidth;
+double screenHeight;
+
+
 // This app's contents start out at _kHeadingMaxHeight and they function like
 // an appbar. Initially the appbar occupies most of the screen and its section
 // headings are laid out in a column. By the time its height has been
@@ -38,6 +43,7 @@ class _RenderStatusBarPaddingSliver extends RenderSliver {
        assert(scrollFactor != null && scrollFactor >= 1.0),
        _maxHeight = maxHeight,
        _scrollFactor = scrollFactor;
+
 
   // The height of the status bar
   double get maxHeight => _maxHeight;
@@ -543,6 +549,15 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
     final double screenHeight = mediaQueryData.size.height;
     final double appBarMaxHeight = screenHeight - statusBarHeight;
 
+    screenWidth = MediaQuery.of(context).size.width;
+
+    if (screenHeight > 900){
+      scrollHeight = screenHeight;
+    } else {
+      scrollHeight = 710;
+    }
+    //screenHeight = MediaQuery.of(context).size.height;
+
     // The scroll offset that reveals the appBarMidHeight appbar.
     final double appBarMidScrollOffset = statusBarHeight + appBarMaxHeight - _kAppBarMidHeight;
 
@@ -583,7 +598,7 @@ class _AnimationDemoHomeState extends State<AnimationDemoHome> {
                 // Details
                 SliverToBoxAdapter(
                   child: SizedBox(
-                    height: 710.0,
+                    height: scrollHeight,
                     child: NotificationListener<ScrollNotification>(
                       onNotification: (ScrollNotification notification) {
                         return _handlePageNotification(notification, _detailsPageController, _headingPageController);

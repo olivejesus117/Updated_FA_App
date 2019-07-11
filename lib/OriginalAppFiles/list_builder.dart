@@ -37,6 +37,8 @@ class ListState extends State<LevelThree> {
   double screenHeight;
 
   double fontsize;
+  double indexRadius;
+  double indexFont;
 
   double cWidth = 0.0;
   double itemHeight = 100;
@@ -87,8 +89,12 @@ class ListState extends State<LevelThree> {
 
     if (screenHeight < 900){
       fontsize = 18;
+      indexRadius = 22;
+      indexFont = 20;
     } else {
-      fontsize = 55;
+      fontsize = 40;
+      indexRadius = 44;
+      indexFont = 40;
     }
 //    double progressWidth;
 //
@@ -195,7 +201,7 @@ class ListState extends State<LevelThree> {
                                         maxLines: 1,
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
-                                          fontSize: 55,
+                                          fontSize: fontsize,
                                           color: Colors.white,
                                         ),
                                       ),
@@ -215,7 +221,7 @@ class ListState extends State<LevelThree> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 CircleAvatar(
-                                  radius: 22,
+                                  radius: indexRadius,
                                   foregroundColor:
                                       Color.fromRGBO(255, 255, 255, 1),
                                   backgroundColor:
@@ -223,7 +229,7 @@ class ListState extends State<LevelThree> {
                                   child: Text(
                                     'i',
                                     style: new TextStyle(
-                                      fontSize: 20.0,
+                                      fontSize: indexFont,
                                     ),
                                   ),
                                 ),
@@ -242,7 +248,7 @@ class ListState extends State<LevelThree> {
                                         maxLines: 1,
                                         textAlign: TextAlign.start,
                                         style: new TextStyle(
-                                          fontSize: 55,
+                                          fontSize: fontsize,
                                         ),
                                       ),
                                     ),
@@ -264,13 +270,13 @@ class ListState extends State<LevelThree> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             CircleAvatar(
-                              radius: 22,
+                              radius: indexRadius,
                               foregroundColor: Color.fromRGBO(255, 255, 255, 1),
                               backgroundColor: Color.fromRGBO(90, 177, 106, 1),
                               child: Text(
                                 '$index1',
                                 style: new TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: indexFont,
                                 ),
                               ),
                             ),
