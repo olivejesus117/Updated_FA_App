@@ -64,7 +64,7 @@ class SectionCard extends StatelessWidget {
       buttonHeight = 65;
     } else {
       buttonFontSize = 40;
-      titleFontSize = 100;
+      titleFontSize = 50;
       buttonHeight = 90;
     }
 

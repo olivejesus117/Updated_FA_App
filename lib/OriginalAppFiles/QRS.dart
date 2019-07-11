@@ -29,6 +29,7 @@ class ListState extends State<QRS> {
 
   Color lightGreen = Color.fromRGBO(90, 177, 106, 1);
 
+  double fontSize;
 
 
   @override
@@ -48,6 +49,12 @@ class ListState extends State<QRS> {
     } else {
       screenWidthMultiplyer = screenWidth / 100;
       screenHeightMultiplyer = screenHeight / 100;
+    }
+
+    if (screenHeight > 900) {
+      fontSize = 30;
+    } else {
+      fontSize = 16;
     }
 
 
@@ -158,9 +165,9 @@ class ListState extends State<QRS> {
                           },
                           children: [
                             TableRow(children: [
-                              wideWidget(passedList[index].disease),
-                              mediumWidget(passedList[index].level),
-                              smallWidget(passedList[index].duration)
+                              wideWidget(passedList[index].disease, fontSize),
+                              mediumWidget(passedList[index].level, fontSize),
+                              smallWidget(passedList[index].duration, fontSize)
                             ]),
                           ]);
                     }),
@@ -173,20 +180,16 @@ class ListState extends State<QRS> {
   }
 }
 
-wideWidget(String text) {
+wideWidget(String text, double fontSize) {
+
+
+
   return Container(
     margin: EdgeInsets.only(top: 8, left: 8, bottom: 8),
     padding: EdgeInsets.all(10),
-    child: ConstrainedBox(
-      constraints: BoxConstraints(
-          maxHeight: screenHeightMultiplyer * 50),
-      child: AutoSizeText(
-        text,
-        maxLines: 15,
-        maxFontSize: 50,
-        minFontSize: 17,
-        style: TextStyle( color: Colors.white),
-      ),
+    child: Text(
+      text,
+      style: TextStyle( fontSize: fontSize, color: Colors.white),
     ),
     decoration: BoxDecoration(
         color: Color.fromRGBO(35, 78, 142, 1),
@@ -195,44 +198,30 @@ wideWidget(String text) {
   );
 }
 
-mediumWidget(String text) {
+mediumWidget(String text, fontSize) {
   return Container(
     margin: EdgeInsets.only(top: 8, left: 8, bottom: 8),
     padding: EdgeInsets.all(10),
     child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-              maxHeight: screenHeightMultiplyer * 50),
-          child: AutoSizeText(
-            text,
-            maxLines: 15,
-            maxFontSize: 50,
-            minFontSize: 17,
-            style: TextStyle( color: Colors.white),
-    ),
-        )),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: fontSize, color: Colors.white),
+    )),
     decoration: BoxDecoration(
         color: Color.fromRGBO(35, 78, 142, 1),
         borderRadius: BorderRadius.all(Radius.circular(10))),
   );
 }
 
-smallWidget(String text) {
+smallWidget(String text, fontSize) {
   return Container(
     margin: EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
     padding: EdgeInsets.all(10),
     child: Center(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-              maxHeight: screenHeightMultiplyer * 50),
-          child: AutoSizeText(
-            text,
-            maxLines: 15,
-            maxFontSize: 50,
-            minFontSize: 17,
-            style: TextStyle( color: Colors.white),
-    ),
-        )),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: fontSize, color: Colors.white),
+    )),
     decoration: BoxDecoration(
         color: Color.fromRGBO(35, 78, 142, 1),
         borderRadius: BorderRadius.all(Radius.circular(10))),

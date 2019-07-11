@@ -92,9 +92,9 @@ class ListState extends State<LevelThree> {
       indexRadius = 22;
       indexFont = 20;
     } else {
-      fontsize = 40;
-      indexRadius = 44;
-      indexFont = 40;
+      fontsize = 30;
+      indexRadius = 34;
+      indexFont = 30;
     }
 //    double progressWidth;
 //
@@ -190,20 +190,12 @@ class ListState extends State<LevelThree> {
                                       Icons.play_arrow,
                                       color: Colors.white,
                                     ),
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxHeight: screenHeight/30
-                                      ),
-                                      child: AutoSizeText(
-                                        '${passedList[index].playYoutube}',
-                                        minFontSize: 18,
-                                        maxFontSize: 70,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontSize: fontsize,
-                                          color: Colors.white,
-                                        ),
+                                    Text(
+                                      '${passedList[index].playYoutube}',
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        fontSize: fontsize,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ],
@@ -237,19 +229,11 @@ class ListState extends State<LevelThree> {
                                   child: Container(
                                     padding:
                                         EdgeInsetsDirectional.only(start: 16,end: 8),
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                          maxHeight: screenHeight/30
-                                      ),
-                                      child: AutoSizeText(
-                                        '${passedList[index].heading}',
-                                        minFontSize: 18,
-                                        maxFontSize: 70,
-                                        maxLines: 1,
-                                        textAlign: TextAlign.start,
-                                        style: new TextStyle(
-                                          fontSize: fontsize,
-                                        ),
+                                    child: Text(
+                                      '${passedList[index].heading}',
+                                      textAlign: TextAlign.start,
+                                      style: new TextStyle(
+                                        fontSize: fontsize,
                                       ),
                                     ),
                                   ),
@@ -287,17 +271,10 @@ class ListState extends State<LevelThree> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                          maxHeight: screenHeight/3,
-                                      ),
-                                      child: AutoSizeText(
-                                        '${passedList[index].direction}',
-                                        minFontSize: 18,
-                                        maxFontSize: 70,
-                                        style: new TextStyle(
-                                          fontSize: fontsize,
-                                        ),
+                                    Text(
+                                      '${passedList[index].direction}',
+                                      style: new TextStyle(
+                                        fontSize: fontsize,
                                       ),
                                     ),
                                     Container(

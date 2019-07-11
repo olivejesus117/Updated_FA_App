@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'Data.dart';
 import 'list_builder.dart';
+import 'package:flutter/services.dart';
 
 class AvazziaSecondLevel extends StatefulWidget {
   @override
@@ -31,7 +32,7 @@ class State1 extends State<AvazziaSecondLevel> {
   double unpressedHeightCA;
 
   double CategoryRadius = 20;
-  double ProtocolRadius = 80;
+  double ProtocolRadius = 20;
 
   double selectionHeight = 65;
 
@@ -43,11 +44,19 @@ class State1 extends State<AvazziaSecondLevel> {
   double screenWidth;
   double screenHeight;
 
+  double appBarHeight;
+
   double screenWidthMultiplyer;
   double screenHeightMultiplyer;
 
   @override
   Widget build(BuildContext context) {
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     double screenHeight = MediaQuery.of(context).size.height;
     print(screenHeight);
 
@@ -92,18 +101,36 @@ class State1 extends State<AvazziaSecondLevel> {
     }
 
 
+
+
+    if (screenHeight > 900 && isLandscape != true) {
+      screenWidthMultiplyer = screenWidth / 100;
+      screenHeightMultiplyer = screenHeight / 100;
+      CategoryRadius = 40;
+      ProtocolRadius = 40;
+      appBarHeight = 50;
+    } else if (screenHeight > 900 && isLandscape == true){
+      screenWidthMultiplyer = screenWidth / 200;
+      screenHeightMultiplyer = screenHeight / 200;
+      CategoryRadius = 40;
+      ProtocolRadius = 40;
+      appBarHeight = 50;
+    }else if (screenHeight > 700) {
+      screenWidthMultiplyer = screenWidth / 130;
+      screenHeightMultiplyer = screenHeight / 130;
+    }
+
     unpressedHeightASM = screenHeightMultiplyer * 10;
     unpressedHeightA = screenHeightMultiplyer * 10;
     unpressedHeightRR = screenHeightMultiplyer * 10;
     unpressedHeightCA = screenHeightMultiplyer * 10;
 
-    if (screenHeight > 900) {
-      screenWidthMultiplyer = screenWidth / 200;
-      screenHeightMultiplyer = screenHeight / 200;
-    }
 
     return Scaffold(
-      appBar: AppBar(
+      appBar:
+
+      AppBar(
+
         centerTitle: true,
         title: Text('Common Protocols'),
         backgroundColor: Color.fromRGBO(35, 78, 142, 1),
@@ -448,14 +475,14 @@ class State1 extends State<AvazziaSecondLevel> {
                           child: Center(
                             child: ConstrainedBox(
                               constraints: BoxConstraints(
-                                  maxHeight: screenHeightMultiplyer * 30
+                                  maxHeight: screenHeightMultiplyer * 4
                               ),
                               child: AutoSizeText(
                                 'Anxiety/Stress/Migraine',
                                 minFontSize: 19,
                                 maxFontSize: 70,
                                 style: TextStyle(
-                                  fontSize: 19.0,
+                                  fontSize: 70.0,
                                   fontStyle: FontStyle.normal,
                                   color: Colors.white,
                                   shadows: [

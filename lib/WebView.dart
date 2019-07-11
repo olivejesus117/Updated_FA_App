@@ -46,7 +46,8 @@ _launchURL(String url) async {
     return WebviewScaffold(
       url: url,
 
-      appBar: AppBar(backgroundColor: darkBlue,title: Text(appBrTitle),
+      appBar: AppBar(backgroundColor: darkBlue,
+        centerTitle: true,title: Text(appBrTitle),
       ),withZoom: true,
 //      body:
 //      WebView(

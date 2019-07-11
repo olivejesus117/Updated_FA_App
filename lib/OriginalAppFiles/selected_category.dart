@@ -203,7 +203,7 @@ class ListStateGut extends State<selected_category> {
   Color green = Color.fromRGBO(90, 177, 106, 1);
 
   double CategoryRadius = 20;
-  double ProtocolRadius = 80;
+  double ProtocolRadius = 20;
 
   double selectionHeight = 65;
 
@@ -220,11 +220,19 @@ class ListStateGut extends State<selected_category> {
     screenHeightMultiplyer = screenHeight / 100;
 
     if (isLandscape == true) {
-      screenWidthMultiplyer = screenWidth / 60;
-      screenHeightMultiplyer = screenHeight / 60;
+      screenWidthMultiplyer = screenWidth / 70;
+      screenHeightMultiplyer = screenHeight / 70;
     } else {
       screenWidthMultiplyer = screenWidth / 100;
       screenHeightMultiplyer = screenHeight / 100;
+    }
+
+    if (screenHeight > 900) {
+      screenWidthMultiplyer = screenWidth / 150;
+      screenHeightMultiplyer = screenHeight / 150;
+    } else if (screenHeight > 700) {
+      screenWidthMultiplyer = screenWidth / 120;
+      screenHeightMultiplyer = screenHeight / 120;
     }
 
     return Scaffold(

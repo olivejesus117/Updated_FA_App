@@ -144,6 +144,7 @@ class PDFScreen extends StatelessWidget {
       child: PDFViewerScaffold(
           appBar: AppBar(backgroundColor: Color.fromRGBO(21, 57, 112, 1),
               title: Text(title),
+              centerTitle: true,
               leading: new IconButton(
                   icon: new Icon(Icons.arrow_back),
                   onPressed: () {
